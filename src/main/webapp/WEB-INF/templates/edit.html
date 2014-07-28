@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8" />
+<title>net.proventis.tree</title>
+<link rel="stylesheet" th:href="@{/resources/css/tree.css}" />
+</head>
+<body>
+	<h3>Edit tree node</h3>
+	<div id="edit-form-container">
+		<form action="#" th:object="${treeNodeForm}" th:action="@{'/node/' + ${treeNodeForm.uuid}}" method="POST">
+				<div th:if="${nodeHasErrors}">
+					<p th:each="err : ${errorList}" th:text="${err}">Input is incorrect</p>
+				</div>
+			<label for="nodeId">Node Id:</label> <input type="text" th:field="*{nodeId}" th:value="${treeNodeForm.nodeId}" disabled="disabled"></input><br />
+			<label for="uuid">Uuid:</label> <input type="text" th:field="*{uuid}" th:value="${treeNodeForm.uuid}" disabled="disabled" /><br /> <label
+				for="createdDate">Created:</label> <input type="text" th:field="*{createdDate}" th:value="${treeNodeForm.createdDate}"
+				disabled="disabled" /><br /> <label for="lastModifiedDate">Last modified:</label> <input type="text" th:field="*{lastModifiedDate}"
+				th:value="${treeNodeForm.lastModifiedDate}" disabled="disabled" /><br /> <label for="parent">parent:</label> <input type="text"
+				th:value="${parentName}" disabled="disabled" /><br /> <label for="isRoot">is root:</label> <input type="text" th:value="${isRoot}"
+				disabled="disabled" /><br /> <label for="name">Name:</label> <input type="text" th:field="*{name}" th:value="${treeNodeForm.name}" /><br />
+			<button type="submit" name="save" th:text="Save">Save</button>
+			<br /> <br /> <a href="#" th:href="@{'/node/' + ${treeNodeForm.uuid} + '/remove'}">Delete node</a>
+		</form>
+	</div>
+	<hr />
+	<div id="edit-children-container">
+		<h3 th:text="'Children (' + ${#lists.size(children)} + ')'">Children (2)</h3>
+		<div id="child" th:unless="${#lists.isEmpty(children)}">
+			<div th:each="child : ${children}">
+				<a href="#" th:href="@{'/node/' + ${child.uuid}}" th:text="${child.name}">node name</a> <a href="#"
+					th:href="@{'/node/' + ${child.uuid} + '/remove'}">Delete</a>
+			</div>
+		</div>
+		<p>
+			<a th:href="@{'/node/' + ${parentUuid} + '/add'}">Add child</a>
+		</p>
+		<div id="add-child-container" th:if="${addChild}">
+
+
+			<form action="#" th:object="${childNodeForm}" th:action="@{'/node/' + ${parentUuid} + '/add' }" method="POST">
+				<div th:if="${childHasErrors}">
+					<p th:each="err : ${errorList}" th:text="${err}">Input is incorrect</p>
+				</div>
+				<label for="name">Name:</label> <input type="text" th:field="*{name}" /><br />
+				<button type="submit" name="save" th:text="Save">Save</button>
+			</form>
+
+		</div>
+
+	</div>
+
+</body>
+</html>

@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8" />
+<title>Tree</title>
+</head>
+<body>
+	<form action="#" th:object="${treeNodeForm}" th:action="@{/node}" method="POST">
+		<div th:if="${rootHasErrors}">
+			<p th:each="err : ${errorList}" th:text="${err}">Input is incorrect</p>
+		</div>
+		<div>
+			<label for="name">Root node:</label> <input type="text" th:field="*{name}" />
+			<button type="submit" name="save" th:text="Save">Save</button>
+		</div>
+	</form>
+</body>
+</html>

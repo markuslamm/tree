@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8" />
+<title>net.proventis.tree</title>
+</head>
+<body>
+	<div th:if="${#lists.isEmpty(allNodes)}">
+		<p>No nodes found</p>
+		<p>
+			<a href="#" th:href="@{/node}">Create new tree</a>
+		</p>
+	</div>
+	<div id="nodes-container" th:if="${not #lists.isEmpty(allNodes)}">
+		<div id="node-container" th:each="node : ${orderedNodes}">
+
+			<span th:text="${node.depthString}"></span>
+			<a href="#" th:href="@{'/node/' + ${node.uuid}}" th:text="${node.name}">node name (2)</a>
+			<span th:text="' (' + ${#lists.size(node.children)} + ')'"></span>
+
+		</div>
+	</div>
+</body>
+</html>

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+	<appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+		<layout class="ch.qos.logback.classic.PatternLayout">
+			<pattern>%date [%thread] %-5level %logger{5} - %msg%n</pattern>
+		</layout>
+	</appender>
+	<logger name="net.proventis.tree" level="DEBUG" />
+	<logger name="org.springframework.web" level="DEBUG" />
+	<logger name="org.springframework.webmvc" level="DEBUG" />
+	<logger name="javax.validation" level="DEBUG" />
+	<logger name="org.thymeleaf" level="OFF" />
+	<root level="INFO">
+		<appender-ref ref="STDOUT" />
+	</root>
+</configuration>

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+	<appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+		<layout class="ch.qos.logback.classic.PatternLayout">
+			<pattern>%date [%thread] %-5level %logger{5} - %msg%n</pattern>
+		</layout>
+	</appender>
+	<logger name="neo4j.tree" level="DEBUG" />
+	<logger name="org.springframework.data.neo4j" level="DEBUG" />
+	<root level="INFO">
+		<appender-ref ref="STDOUT" />
+	</root>
+</configuration>
